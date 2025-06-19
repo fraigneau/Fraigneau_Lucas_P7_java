@@ -64,7 +64,7 @@ public class RuleNameController {
      * @return The view name for the rule name add form.
      */
     @Operation(summary = "Display rule name add form", description = "Returns a page with the form to add a new rule name")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/ruleName/add")
     public String addRuleForm(Model model) {
         model.addAttribute("newRuleName", new RuleNameDTO());
@@ -81,7 +81,7 @@ public class RuleNameController {
      *         if validation fails.
      */
     @Operation(summary = "Validate and add a new rule name", description = "Adds a new rule name from form data")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/ruleName/validate")
     public String validate(
             @Parameter(description = "New rule name data to add", required = true, schema = @Schema(implementation = RuleNameDTO.class)) @ModelAttribute("newRuleName") @Valid RuleNameDTO ruleName,
@@ -104,7 +104,7 @@ public class RuleNameController {
      * @return The view name for the rule name update form.
      */
     @Operation(summary = "Display rule name update form", description = "Returns a page with the form to update an existing rule name")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(
             @Parameter(description = "ID of the rule name to update", required = true) @PathVariable("id") int id,
@@ -124,7 +124,7 @@ public class RuleNameController {
      *         if validation fails.
      */
     @Operation(summary = "Update an existing rule name", description = "Updates a rule name with the provided form data")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(
             @Parameter(description = "ID of the rule name to update", required = true) @PathVariable("id") int id,
@@ -147,7 +147,7 @@ public class RuleNameController {
      * @return A redirect to the rule name list page after deletion.
      */
     @Operation(summary = "Delete a rule name", description = "Deletes a rule name by its ID")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(
             @Parameter(description = "ID of the rule name to delete", required = true) @PathVariable("id") int id,

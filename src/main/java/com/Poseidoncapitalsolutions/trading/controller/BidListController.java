@@ -64,7 +64,7 @@ public class BidListController {
      * @return The view name for the bid list add form.
      */
     @Operation(summary = "Display bid list add form", description = "Returns a page with the form to add a new bid list")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/bidList/add")
     public String addBidForm(Model model) {
         model.addAttribute("newBidList", new BidListDTO());
@@ -81,7 +81,7 @@ public class BidListController {
      *         validation fails.
      */
     @Operation(summary = "Validate and add a new bid list", description = "Adds a new bid list from form data")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/bidList/validate")
     public String validate(
             @Parameter(description = "New bid list data to add", required = true, schema = @Schema(implementation = BidListDTO.class)) @ModelAttribute("newBidList") @Valid BidListDTO bid,
@@ -104,7 +104,7 @@ public class BidListController {
      * @return The view name for the bid list update form.
      */
     @Operation(summary = "Display bid list update form", description = "Returns a page with the form to update an existing bid list")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(
             @Parameter(description = "ID of the bid list to update", required = true) @PathVariable("id") int id,
@@ -124,7 +124,7 @@ public class BidListController {
      *         validation fails.
      */
     @Operation(summary = "Update an existing bid list", description = "Updates a bid list with the provided form data")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/bidList/update/{id}")
     public String updateBid(
             @Parameter(description = "ID of the bid list to update", required = true) @PathVariable("id") int id,
@@ -147,7 +147,7 @@ public class BidListController {
      * @return A redirect to the bid list page after deletion.
      */
     @Operation(summary = "Delete a bid list", description = "Deletes a bid list by its ID")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(
             @Parameter(description = "ID of the bid list to delete", required = true) @PathVariable("id") int id,

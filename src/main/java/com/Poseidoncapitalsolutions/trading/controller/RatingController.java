@@ -64,7 +64,7 @@ public class RatingController {
      * @return The view name for the rating add form.
      */
     @Operation(summary = "Display rating add form", description = "Returns a page with the form to add a new rating")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/rating/add")
     public String addRatingForm(Model model) {
         model.addAttribute("newRating", new RatingDTO());
@@ -81,7 +81,7 @@ public class RatingController {
      *         validation fails.
      */
     @Operation(summary = "Validate and add a new rating", description = "Adds a new rating from form data")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/rating/validate")
     public String validate(
             @Parameter(description = "New rating data to add", required = true, schema = @Schema(implementation = RatingDTO.class)) @ModelAttribute("newRating") @Valid RatingDTO rating,
@@ -103,7 +103,7 @@ public class RatingController {
      * @return The view name for the rating update form.
      */
     @Operation(summary = "Display rating update form", description = "Returns a page with the form to update an existing rating")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(
             @Parameter(description = "ID of the rating to update", required = true) @PathVariable("id") int id,
@@ -123,7 +123,7 @@ public class RatingController {
      *         validation fails.
      */
     @Operation(summary = "Update an existing rating", description = "Updates a rating with the provided form data")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/rating/update/{id}")
     public String updateRating(
             @Parameter(description = "ID of the rating to update", required = true) @PathVariable("id") int id,
@@ -146,7 +146,7 @@ public class RatingController {
      * @return A redirect to the rating list page after deletion.
      */
     @Operation(summary = "Delete a rating", description = "Deletes a rating by its ID")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(
             @Parameter(description = "ID of the rating to delete", required = true) @PathVariable("id") int id,
